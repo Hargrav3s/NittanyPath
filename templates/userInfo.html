@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>NittanyPath Home Page</title>
+</head>
+
+<body>
+
+<!--Insert Dashboard Code-->
+<div class="container style=">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/dashboard">Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/dashboard">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/classSearch">Class Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/userProfile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout" tabindex="-1">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+
+<div class="card">
+    <h5 class="card-header">Profile</h5>
+
+    <div class="card-body">
+        <a class="btn btn-success" href="/dashboard" role="button">Go Back</a>
+    <div class="mt-xl-4"></div>
+        <p class="card-text"><strong>Email:</strong> {{ userInfo[0] }}</p>
+        <p class="card-text"><strong>Name:</strong> {{ userInfo[2] }}</p>
+        <p class="card-text"><strong>Age:</strong> {{ userInfo[3] }}</p>
+        <p class="card-text"><strong>Gender:</strong> {{ userInfo[4] }}</p>
+        {% if isStudent %}
+
+            <p class="card-text"><strong>Phone:</strong> {{ studentInfo[1] }}</p>
+            <p class="card-text"><strong>Major:</strong> {{ studentInfo[2] }}</p>
+            <p class="card-text"><strong>Zipcode:</strong> {{ studentInfo[3] }}</p>
+            <p class="card-text"><strong>City:</strong> {{ zipcodeInfo[1] }}</p>
+            <p class="card-text"><strong>State:</strong> {{ zipcodeInfo[2] }}</p>
+
+        {% else %}
+
+            <p class="card-text"><strong>Office:</strong> {{ profInfo[1] }}</p>
+            <p class="card-text"><strong>Department:</strong> {{ profInfo[2] }}</p>
+            <p class="card-text"><strong>Title:</strong> {{ profInfo[3] }}</p>
+
+        {% endif %}
+    </div>
+</div>
+<div class="card">
+    <h5 class="card-header">Change Password</h5>
+    <div class="card-body">
+
+        <form action={{ url_for('userProfile') }} method="POST">
+            <div class="form-row">
+                <div class="col">
+                    <input type="password" class="form-control" id="oldP" placeholder="Old Password" name="oldP">
+                </div>
+                <div class="col">
+                    <input type="password" min="6" minlength="6" class="form-control" id="newP" name="newP"
+                           placeholder="New Password">
+                </div>
+                <div class="col">
+                    <input type="password" min="6" minlength="6" class="form-control" id="newPC" name="newPC"
+                           placeholder="Confirm New Password">
+                </div>
+            </div>
+
+            <div class="mt-xl-4">
+                <div class="mx-auto" style="width: 200px;">
+                    <button type="submit" class="btn btn-primary">Change Password</button>
+                </div>
+            </div>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if shouldFlash %}
+                            {% if wentThrough %}
+                                <p style="color:green;" class="card-footer text-center">{{ message }}</p>
+                            {% else %}
+                                <p style="color:red;" class="card-footer text-center">{{ message }}</p>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+        </form>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

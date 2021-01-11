@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>NittanyPath Home Page</title>
+</head>
+
+<body>
+
+<!--Insert Dashboard Code-->
+<div class="container style=">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/dashboard">Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/dashboard">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/classSearch">Class Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/userProfile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout" tabindex="-1">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% for post_no, name, content, comments in posts %}
+            <div class="row">
+                <div class="media pt-3">
+                    <p class="media-body pb-3 mb-0 small">
+                        <strong class="d-block text-gray-dark">Post #{{ post_no }} by: {{ name }}</strong>
+                        {{ content }}
+                    </p>
+                </div>
+            </div>
+            {% for comm_no, comm_name, comm_content in comments %}
+                <p style="margin-left:10%; margin-right:10%;" class="media-body pb-3 mb-0 small">
+                    <strong class="d-block text-gray-dark">Comment #{{ comm_no }} by: {{ comm_name }}</strong>
+                    {{ comm_content }}
+                </p>
+            {% endfor %}
+            <form action="/classInfo/{{ courseInfo[0] }}/Posts/{{ post_no }}" method="POST">
+                <textarea class="form-control" id="{{ post_no }}" name={{ post_no }} rows="2"></textarea>
+                <button type="submit" class="btn btn-primary">Comment</button>
+            </form>
+        {% endfor %}
+    </div>
+
+<div class="mt-xl-4">
+    &nbsp;
+</div>
+
+    <div class="mt-xl-4">
+        <form action="/classInfo/{{ courseInfo[0] }}/Posts" method="POST">
+
+            <label for="PostTextArea">Create Post:</label>
+            <textarea class="form-control" id="PostTextArea" name="PostTextArea" rows="3"></textarea>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a class="btn btn-success" href="/classInfo/{{ courseInfo[0] }}" role="button">Go Back</a>
+
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

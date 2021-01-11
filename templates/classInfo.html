@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>NittanyPath Home Page</title>
+</head>
+
+<body>
+
+<!--Insert Dashboard Code-->
+<div class="container style=">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/dashboard">Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/dashboard">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/classSearch">Class Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/userProfile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout" tabindex="-1">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="col text-center">
+        {% if isStudent %}
+            {% if isEnrolled %}
+                <!-- Student is Enrolled -->
+
+                <div class="mt-xl-4">
+                    <h3>{{ courseInfo[1] }}</h3>
+                </div>
+                <div class="mt-xl-4">
+                    <!-- Breakpoint for added beauty -->
+                </div>
+
+                <dl class="row">
+                    <dt class="col-sm-3">Professor Email:</dt>
+                    <dd class="col-sm-9">{{ professor[0] }}</dd>
+
+                    <dt class="col-sm-3">Professor Office:</dt>
+                    <dd class="col-sm-9">{{ professor[1] }}</dd>
+
+                    <dt class="col-sm-3">Course Description:</dt>
+                    <dd class="col-sm-9">{{ courseInfo[2] }}</dd>
+
+                    <dt class="col-sm-3">Section Number:</dt>
+                    <dd class="col-sm-9">{{ sec_no }}</dd>
+                </dl>
+
+                <div class="col text-center">
+                    <div class="mt-xl-4">
+                        <p><strong>Your Total Average Grade:</strong> {{ totalGrade }}%</p>
+                </div>
+                    <a class="btn btn-success" href="/classInfo/{{ courseInfo[0] }}/Assignments" role="button">Assignments</a>
+                    <div class="mt-xl-4">
+                    <p><strong>Your Average Assignment Grade:</strong> {{ avgHWGrade }}%</p>
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <a class="btn btn-danger" href="/classInfo/{{ courseInfo[0] }}/Exams" role="button">Exams</a>
+                    <div class="mt-xl-4">
+                <p><strong>Your Average Exam Grade:</strong> {{ avgExamGrade }}%</p>
+
+                </div>
+                <div class="mt-xl-4">
+                    <!-- Breakpoint for added beauty -->
+                </div>
+                <div class="col text-center">
+                    <a class="btn btn-info" href="/classInfo/{{ courseInfo[0] }}/Posts" role="button">Posts</a>
+                </div>
+                <div class="mt-xl-4">
+                    <!-- Breakpoint for added beauty -->
+                </div>
+                <div class="col text-center">
+                    <form action="/classInfo/{{ courseInfo[0] }}" method="POST">
+                        <button type="submit" class="btn btn-primary">Drop Course</button>
+                    </form>
+                </div>
+
+                <div class="mt-xl-4">
+                    <!-- Breakpoint for added beauty -->
+                    <div class="mx-auto" style="width: 200px;">
+                        <a class="btn btn-success" href="/dashboard" role="button">Go Back</a>
+                    </div>
+                </div>
+
+            {% else %}
+                {% if isTA %}
+                    <!-- Student is TA -->
+
+                    <div class="mt-xl-4">
+                        <!-- Breakpoint for added beauty -->
+                    </div>
+
+                    <h3>{{ courseInfo[1] }}</h3>
+
+                    <div class="mt-xl-4">
+                        <!-- Breakpoint for added beauty -->
+                    </div>
+
+                    <div class="col text-center">
+                        <a class="btn btn-info" href="/classInfo/{{ courseInfo[0] }}/Posts" role="button">Posts</a>
+                    </div>
+
+                    <div class="mt-xl-4">
+                        <!-- Breakpoint for added beauty -->
+                        <div class="mx-auto" style="width: 200px;">
+                            <a class="btn btn-success" href="/dashboard" role="button">Go Back</a>
+                        </div>
+                    </div>
+
+                {% else %}
+
+                    <!-- Student is NOT Enrolled and is NOT a TA -->
+
+                    <div class="mt-xl-4">
+                        <!-- Breakpoint for added beauty -->
+                    </div>
+
+                    <div class="col">
+
+                    <h3>{{ courseInfo[1] }}</h3>
+
+                    <div class="mt-xl-4">
+                        <!-- Breakpoint for added beauty -->
+                    </div>
+
+                    <dl class="row">
+
+                        <dt class="col-sm-3 ">Course ID</dt>
+                        <dd class="col-sm-9">{{ courseInfo[0] }}</dd>
+
+                        <dt class="col-sm-3">Course Name</dt>
+                        <dd class="col-sm-9">{{ courseInfo[1] }}</dd>
+
+                        <dt class="col-sm-3">Course Description</dt>
+                        <dd class="col-sm-9">{{ courseInfo[2] }}</dd>
+                        <div class="mx-auto" style="width: 200px;">
+
+                            <div class="mt-xl-4">
+                                <!-- Breakpoint for added beauty -->
+                                <div class="mx-auto" style="width: 200px;">
+                                    <a class="btn btn-info" href="/classInfo/{{ courseInfo[0] }}/Enroll" role="button">Enroll</a>
+                                </div>
+                            </div>
+
+                            <div class="mt-xl-4">
+                                <!-- Breakpoint for added beauty -->
+                                <div class="mx-auto" style="width: 200px;">
+                                    <a class="btn btn-success" href="/dashboard" role="button">Go Back</a>
+                                </div>
+                            </div>
+
+
+                    </dl>
+                {% endif %}
+            {% endif %}
+        {% else %}
+            <!-- Professor -->
+            {% if isEnrolled %}
+                <!-- Professor teaches class -->
+
+                <div class="mt-xl-4">
+                    <!-- Breakpoint for added beauty -->
+                </div>
+
+                <h3>{{ courseInfo[1] }}</h3>
+
+                <div class="mt-xl-4">
+                    <!-- Breakpoint for added beauty -->
+                </div>
+
+                <div class="col text-center">
+                <div class="col text-center">
+                    <a class="btn btn-success" href="/classInfo/{{ courseInfo[0] }}/Assignments" role="button">Assignments</a>
+                </div>
+                <div class="mt-xl-4">
+                    <!-- Breakpoint for added beauty -->
+                </div>
+                <div class="col text-center">
+                    <a class="btn btn-danger" href="/classInfo/{{ courseInfo[0] }}/Exams" role="button">Exams</a>
+                </div>
+                <div class="mt-xl-4">
+                    <!-- Breakpoint for added beauty -->
+                </div>
+                <a class="btn btn-info" href="/classInfo/{{ courseInfo[0] }}/Posts" role="button">Posts</a>
+                <div class="mt-xl-4">
+                    <!-- Breakpoint for added beauty -->
+                </div>
+                <a class="btn btn-danger" href="/classInfo/{{ courseInfo[0] }}/createAssignment" role="button">Create
+                    Assignment</a>
+
+                <div class="mt-xl-4">
+                    <!-- Breakpoint for added beauty -->
+                    <div class="mx-auto" style="width: 200px;">
+                        <a class="btn btn-success" href="/dashboard" role="button">Go Back</a>
+                    </div>
+                </div>
+
+                <div class="mt-xl-4">
+                <!-- Breakpoint for added beauty -->
+
+            {% else %}
+
+                <div class="mt-xl-4">
+                    <!-- Breakpoint for added beauty -->
+                </div>
+
+                <dl class="row">
+                    <dt class="col-sm-3">Course ID</dt>
+                    <dd class="col-sm-9">{{ courseInfo[0] }}</dd>
+
+                    <dt class="col-sm-3">Course Name</dt>
+                    <dd class="col-sm-9">
+                        <p>{{ courseInfo[1] }}</p>
+                    </dd>
+
+                    <dt class="col-sm-3">Course Description</dt>
+                    <dd class="col-sm-9">{{ courseInfo[2] }}</dd>
+                </dl>
+            {% endif %}
+        {% endif %}
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+                integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+                integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+                crossorigin="anonymous"></script>
+</body>
+
+</html>
