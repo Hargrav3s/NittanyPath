@@ -75,6 +75,8 @@ can enter an email and password. If the user enters no email, no password, or en
 the message "incorrect username or password" is displayed to the user.
 
 ## Once Logged In
+User data was given in the form of .csv files which are included with the project, to login and test out the user experience, use usernames and passwords from the .csv files.
+
 With a correct username and password from the database, the user is displayed a dashboard. This dashboard will appear different
 for every user. Professors will see classes they teach, students will see class they are enrolled in, and TA's will see a mix of
 classes they're taking and classes they are teaching in.
