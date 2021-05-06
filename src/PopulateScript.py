@@ -4,6 +4,10 @@ import pandas as pd
 
 connection = sql.connect('database.db')
 
+with open('createTables.sql') as sql_file:
+    sql_as_string = sql_file.read()
+    connection.executescript(sql_as_string)
+
 students_data = pd.read_csv('Students_TA.csv')
 professors_data = pd.read_csv('Professors.csv')
 post_data = pd.read_csv("Posts_Comments.csv")
