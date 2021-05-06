@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from secrets import token_hex
+from PopulateScript import populate
 
 from datetime import datetime
 
@@ -17,7 +18,6 @@ import hashlib as hash
 
 app = Flask("NittanyPath-v1")
 app.secret_key = token_hex(16)
-host = 'http://127.0.0.1:5000/'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
 db = SQLAlchemy(app)
@@ -1055,4 +1055,7 @@ def change_exam_grade(email, class_id, sec_no, assignment_no, grade):
 
 
 if __name__ == "__main__":
-    app.run()
+    print("Populating DB")
+    populate()
+    print("Done!")
+    app.run(port=5000, threaded=True, host=('0.0.0.0'))
