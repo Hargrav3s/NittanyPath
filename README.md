@@ -44,8 +44,10 @@ Open a terminal and clone the repository into your system.
 Then change into the repositories' directory.
 Run the following command:
 >docker build --tag nittanypath
+
 Then the following command
 >docker run -p 5000:5000 nittanypath
+
 This will run the application in a docker container and is viewable at 0.0.0.0:5000.
 
 
