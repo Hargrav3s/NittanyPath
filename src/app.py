@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from secrets import token_hex
 
 from datetime import datetime
 
@@ -15,7 +16,7 @@ import hashlib as hash
 # hashlib is used to hash the database passwords using MD4 format.
 
 app = Flask(__name__)
-app.secret_key = "This is a secret (;"
+app.secret_key = token_hex(16)
 host = 'http://127.0.0.1:5000/'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
