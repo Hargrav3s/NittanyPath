@@ -1,4 +1,4 @@
-CREATE TABLE User (
+CREATE TABLE IF NOT EXISTS User (
     email TEXT,
     password_hashed TEXT,
     name TEXT,
@@ -8,7 +8,7 @@ CREATE TABLE User (
     PRIMARY KEY (email)
 );
 
-CREATE TABLE Students (
+CREATE TABLE IF NOT EXISTS Students (
     email TEXT,
     phone TEXT,
     major TEXT,
@@ -20,7 +20,7 @@ CREATE TABLE Students (
     FOREIGN KEY (zipcode) REFERENCES Zipcodes (zipcode)
 );
 
-CREATE TABLE Zipcodes (
+CREATE TABLE IF NOT EXISTS Zipcodes (
     zipcode int,
     city TEXT,
     state TEXT,
@@ -28,7 +28,7 @@ CREATE TABLE Zipcodes (
     PRIMARY KEY(zipcode)
 );
 
-CREATE TABLE Professors(
+CREATE TABLE IF NOT EXISTS Professors(
     email TEXT,
     office_address TEXT,
     department TEXT,
@@ -39,7 +39,7 @@ CREATE TABLE Professors(
     FOREIGN KEY (department) REFERENCES Departments(dept_id)
 );
 
-CREATE TABLE Departments(
+CREATE TABLE IF NOT EXISTS Departments(
     dept_id TEXT,
     dept_name TEXT,
     dept_head TEXT,
@@ -48,7 +48,7 @@ CREATE TABLE Departments(
     FOREIGN KEY (dept_head) REFERENCES User (email)
 );
 
-CREATE TABLE Courses(
+CREATE TABLE IF NOT EXISTS Courses(
     course_id TEXT,
     course_name TEXT,
     course_desc TEXT,
@@ -59,7 +59,7 @@ CREATE TABLE Courses(
     FOREIGN KEY (teaching_team_id) REFERENCES Prof_Teaching_Teams (teaching_team_id)
 );
 
-CREATE TABLE Sections(
+CREATE TABLE IF NOT EXISTS Sections(
     course_id TEXT,
     sec_no int,
     max_limit int,
@@ -68,7 +68,7 @@ CREATE TABLE Sections(
     FOREIGN KEY (course_id) REFERENCES Courses (course_id)
 );
 
-CREATE TABLE Enrolls (
+CREATE TABLE IF NOT EXISTS Enrolls (
     student_email TEXT,
     course_id TEXT,
     section_no int,
@@ -78,7 +78,7 @@ CREATE TABLE Enrolls (
     FOREIGN KEY(course_id) REFERENCES Courses(course_id)
 );
 
-CREATE TABLE Prof_Teaching_Teams (
+CREATE TABLE IF NOT EXISTS Prof_Teaching_Teams (
     prof_email TEXT,
     teaching_team_id int,
 
@@ -86,7 +86,7 @@ CREATE TABLE Prof_Teaching_Teams (
     FOREIGN KEY (prof_email) REFERENCES User (email)
 );
 
-CREATE TABLE TA_Teaching_Teams (
+CREATE TABLE IF NOT EXISTS TA_Teaching_Teams (
     student_email TEXT,
     teaching_team_id int,
 
@@ -94,7 +94,7 @@ CREATE TABLE TA_Teaching_Teams (
     FOREIGN KEY (student_email) REFERENCES User (email)
 );
 
-CREATE TABLE Homework(
+CREATE TABLE IF NOT EXISTS Homework(
     course_id TEXT,
     sec_no INT,
     hw_no INT,
@@ -105,7 +105,7 @@ CREATE TABLE Homework(
     FOREIGN KEY (sec_no) REFERENCES Sections (sec_no)
 );
 
-CREATE TABLE Homework_Grades(
+CREATE TABLE IF NOT EXISTS Homework_Grades(
     student_email TEXT,
     course_id TEXT,
     sec_no INT,
@@ -118,7 +118,7 @@ CREATE TABLE Homework_Grades(
     FOREIGN KEY (sec_no) REFERENCES Sections (sec_no)
 );
 
-CREATE TABLE Exams(
+CREATE TABLE IF NOT EXISTS Exams(
     course_id TEXT,
     sec_no INT,
     exam_no INT,
@@ -129,7 +129,7 @@ CREATE TABLE Exams(
     FOREIGN KEY (sec_no) REFERENCES Sections (sec_no)
 );
 
-CREATE TABLE Exam_Grades(
+CREATE TABLE IF NOT EXISTS Exam_Grades(
     student_email TEXT,
     course_id TEXT,
     sec_no INT,
@@ -142,7 +142,7 @@ CREATE TABLE Exam_Grades(
     FOREIGN KEY (sec_no) REFERENCES Sections (sec_no)
 );
 
-CREATE TABLE Posts (
+CREATE TABLE IF NOT EXISTS Posts (
     course_id TEXT,
     post_no INT,
     student_email TEXT NOT NULL,
@@ -153,7 +153,7 @@ CREATE TABLE Posts (
     FOREIGN KEY (student_email) REFERENCES User (email)
 );
 
-CREATE TABLE Comments(
+CREATE TABLE IF NOT EXISTS Comments(
     course_id TEXT,
     post_no INT,
     comment_no INT,

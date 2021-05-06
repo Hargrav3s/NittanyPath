@@ -15,7 +15,7 @@ import hashlib as hash
 # sqlite3 is used to communicate with my database.
 # hashlib is used to hash the database passwords using MD4 format.
 
-app = Flask(__name__)
+app = Flask("NittanyPath-v1")
 app.secret_key = token_hex(16)
 host = 'http://127.0.0.1:5000/'
 
