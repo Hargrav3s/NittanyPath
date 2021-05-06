@@ -43,7 +43,7 @@ All you need is the latest version of docker installed.
 Open a terminal and clone the repository into your system.
 Then change into the repositories' directory.
 Run the following command:
->docker build --tag nittanypath
+>docker build --tag nittanypath .
 
 Then the following command
 >docker run -p 5000:5000 nittanypath
