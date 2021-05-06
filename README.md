@@ -37,13 +37,18 @@ However, if for some reason that fails, you only need these files:
 
 The templates folder contains all HTML pages used for this project. Each encoded with bootstrap logic and components.
 ### Prerequisites
-PyCharm Professional IDE, including these libraries and packages:
-- flask
-- flask_login
-- flask_sqlalchemy
-- datetime
-- sqlite3
-- hashlib
+All you need is the latest version of docker installed.
+
+## Installation
+Open a terminal and clone the repository into your system.
+Then change into the repositories' directory.
+Run the following command:
+* [docker build --tag nittanypath]
+Then the following command
+* [docker run -p 5000:5000 nittanypath]
+This will run the application in a docker container and is viewable at 0.0.0.0:5000.
+
+
 ## How the Project Works / How it was Made
 The first step to this project was to create all of the SQL tables. I choose SQLite as the class
 had previous practice with this package earlier in another assignment.
