@@ -48,8 +48,7 @@ Run the following command:
 Then the following command
 >docker run -p 5000:5000 nittanypath
 
-This will run the application in a docker container and is viewable at 0.0.0.0:5000.
-
+This will run the application in a docker container and is viewable at 0.0.0.0:5000 on Linux and localhost:5000 on Windows.
 
 ## How the Project Works / How it was Made
 The first step to this project was to create all of the SQL tables. I choose SQLite as the class
